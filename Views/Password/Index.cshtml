@@ -1,0 +1,48 @@
+﻿@model PasswordViewModel
+
+<script>
+    function CopyPassword() {
+        navigator.clipboard.writeText(document.getElementById('copy-text').innerText)
+            .then(function () {
+                console.log('password has been copied')
+                alert("Copied!")
+            })
+    }
+</script>
+
+<style>
+    body{
+        background-color: lightyellow;
+    }
+</style>
+
+<div>
+    <div>
+        <h1 id="copy-text" class="text-center">
+            @Model.GeneratedPassword
+        </h1>
+    </div>
+
+    <form method="post" action="~/Password/GenerateNewRandomPassword">
+        <div class="mb-3 text-center">
+            <label for="PasswordLength" class="form-label">Password Length</label>
+            <input type="number" class="form-control" name="PasswordLength">
+        </div>
+        <div class="mb-3 text-center">
+            <label for="IncludeUpperCase" class="form-label">Upper Case</label>
+            <input type="checkbox" class="form-check-input" name="IncludeUpperCase" value="true">
+            <input type="hidden" value="false" name="IncludeUpperCase">
+        </div>
+        <div class="mb-3 text-center">
+            <label for="IncludeSpecialCharacters" class="form-label">Special Characters</label>
+            <input type="checkbox" class="form-check-input" name="IncludeSpecialCharacters" value="true">
+            <input type="hidden" value="false" name="IncludeSpecialCharacters">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">GENERATE!</button>
+            <button type="reset" class="btn btn-secondary">RESET</button>
+            <button type="button" class="btn btn-info" onclick="CopyPassword()">COPY!</button>
+        </div>
+    </form>
+</div>
+
